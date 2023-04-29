@@ -7,12 +7,9 @@ const initialState = {};
 
 export const game = createSlice({
   name: 'game',
-  initialState: {
-
-  },
+  initialState: { username: '', game: null, loading: false, position: null },
 
   reducers: {
-
     userName: (state, action) => {
       state.username = action.payload;
     },
@@ -23,9 +20,8 @@ export const game = createSlice({
       state.loading = action.payload;
     },
     setCurrentPosition: (store, action) => {
-      store.position = action.payload
+      store.position = action.payload;
     }
-
   }
 });
 
@@ -39,7 +35,7 @@ export const startGame = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username: 'username' })
+      body: JSON.stringify({ username: `${getState().game.username}` })
     };
     fetch('https://labyrinth.technigo.io/start/', options)
       .then((response) => {
@@ -80,4 +76,3 @@ export const nextStep = (direction) => {
       });
   };
 };
-
